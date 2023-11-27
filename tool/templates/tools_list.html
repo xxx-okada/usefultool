@@ -1,0 +1,45 @@
+<!--P353で大幅に削除-->
+
+  <div class="album py-5 bg-body-tertiary"><!--教科書はbg-light-->
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for record in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+
+            <img src="{{ record.image1.url }}"
+                 class="bd-placeholder-img card-img-top"
+                 width="100%" height="180"
+                 xmlns="http://www.w3.org/2000/svg"
+                 role="img" aria-label="Placeholder: Thumbnail"
+                 preserveAspectRatio="xMidYMid slice"
+                 focusable="false">
+                 <title>Placeholder</title>
+                 <rect width="100%" height="100%" fill="#55595c"/>
+          </img>
+            <!--タイトルとボタンを出力するブロック-->
+            <div class="card-body">
+              <p class="card-text" style="font-size: 16pt;"><a href="{% url 'tool:tools_detail' record.pk %}" class="list_link">
+                {{record.title}}</a></p>
+                <hr>
+                <small>
+                  Category:　<a href="{% url 'tool:tools_cat' category=record.category.id %}" class="def_link">{{record.category.title}}</a>
+                  <br>post-by:　<a href="{% url 'tool:user_list' user=record.user.id %}" class="def_link">{{record.user.username}}</a>
+                </small>
+                
+              
+              <div class="d-flex justify-content-between align-items-center">
+
+                
+
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>

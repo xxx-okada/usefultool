@@ -1,0 +1,26 @@
+<!--ベーステンプレートを適応-->
+{% extends 'base.html' %}
+
+<!--ヘッダー情報のページタイトルを設定-->
+{% block title %}Tool Category{% endblock %}
+
+{% block contents %}
+<div style="margin-right:auto; margin-left:auto; margin-top:5%; margin-bottom:4%; width:800px; border:none;">
+
+      <h2>カテゴリから探す</h2><br>
+      <div class="container">
+        <div class="row row-cols-md-3 g-3 cat_list">
+            {% for record in object_list %}
+            <a href="{% url 'tool:tools_cat' category=record.id %}" class="def_link cat_list"> {{record.title}}</a> 
+
+
+
+
+  {% endfor %}
+
+        </div></div>
+
+</div>
+
+
+{% endblock %}

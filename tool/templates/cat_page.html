@@ -1,0 +1,21 @@
+<!--ベーステンプレートを適応-->
+{% extends 'base.html' %}
+
+<!--ヘッダー情報のページタイトルを設定-->
+{% block title %}Category{% endblock %}
+
+    {% block contents %}
+    {% for category in object_list %}
+    <h4 class="space1">【　{{ category.category }}　】</h4>
+    {% endfor %}
+
+    {% if object_list.count == 0 %}
+
+    <h4 class="space1">該当記事がありません。</h4>
+    {% endif %}
+
+
+    {% include "tools_list.html" %}
+    {% include "pagination.html" %}
+
+    {% endblock %}

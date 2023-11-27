@@ -1,0 +1,14 @@
+<!--ベーステンプレートを適応-->
+{% extends 'base.html' %}
+
+<!--ヘッダー情報のページタイトルを設定-->
+{% block title %}UsefuL TooL{% endblock %}
+
+    {% block contents %}
+    <!--タイトルテンプレートの組込み-->
+    {% include "tools_title.html" %}
+    <!--投稿一覧テンプレートの組込み-->
+    {% include "tools_list.html" %}
+    {% include "pagination.html" %}
+
+    {% endblock %}

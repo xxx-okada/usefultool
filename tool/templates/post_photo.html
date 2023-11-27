@@ -1,0 +1,49 @@
+<!--ベーステンプレートを適応-->
+{% extends 'base.html' %}
+
+<!--ヘッダー情報のページタイトルを設定-->
+{% block title %}Post{% endblock %}
+
+    {% block contents %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col offset-2">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <th>カテゴリ</th>
+                            <td>{{ form.category}}</td><td></td>
+                        </tr>
+
+                        <tr>
+                            <th>タイトル</th>
+                            <td>{{ form.title }}</td><td></td>
+                        </tr>
+                        <tr>
+                        <th>キーワード</th>
+
+                        <td>{{ form.for_user }}</td><td>検索ワードを入力<br><br>例）勉強、仕事、時短、ボールペン、・・・<br>
+                        具体的な使用用途や関連するワードを自由に入力してください</td>
+                        </tr>
+                        <th>コメント</th>
+                        <td>{{ form.comment }}</td><td>使った感想や便利だと思うポイント、オススメ機能など、<br>ツールについて入力してください</td>
+                        </tr>
+                        <tr>
+                        <th>画像１</th>
+                        <td>{{ form.image1 }}</td><td>※画像は必ず1枚以上投稿してください。</td>
+                        </tr>
+                        <tr>
+                        <th>画像２</th>
+                        <td>{{ form.image2 }}</td><td style="color: crimson; width: 400px;">ご自分で撮影した写真を推奨します。引用する場合には著作権や肖像権に十分ご注意ください。</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <button type="submit" class="btn-color5">投稿する</button>
+                    <p style="color: crimson; width: 530px;">投稿内容は閲覧者全員に公開されます。個人情報の入力にご注意ください。<br>また、公序良俗に反する内容の投稿は固く禁じます。</p>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

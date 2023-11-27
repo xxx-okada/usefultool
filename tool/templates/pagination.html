@@ -1,0 +1,98 @@
+<style>
+    /* 参考：https://csshtml.work/button-color/#i , https://rilaks.jp/blog/mouse-over/#i-5 */
+    .color {
+      background-color: white;
+      border-color: coral;
+      color: coral;
+    }
+    .color:hover{
+      background-color: coral;
+      color: white;
+      border-style:none ;
+    }
+    /* ボタンデザイン変更 */
+    .p-btn {
+     background-color: white;
+     border-color: coral;
+     color: coral;
+     width: 30px;
+     height: 40px;
+    }
+    .p-btn:hover{
+     background-color: coral;
+     color: white;
+     border-style:none ;
+      }
+    .p-btn_l {
+     background-color: white;
+     border-color: coral;
+     color: coral;
+     width: 30px;
+     height: 40px;
+     border-radius:5px 0 0 5px;
+    }
+    .p-btn_l:hover{
+     background-color: coral;
+     color: white;
+     border-style:none ;
+      }
+  .page-now{
+    position:relative;
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    text-align:center;
+    padding-top: 6px;
+    background-color:coral;
+    border:1px solid coral;
+    /* transition:color  */
+}
+  </style>
+
+<!--P246~ ページネーションアイコンを左右中央に配置 -->
+<ul class="pagination"
+    style="justify-content:center" >
+
+    <!-- 前頁を表示するアイコンとリンクの設定＋ページネーションされたページオブジェクトをpage_objで取得
+         page.has_prexious:直前にページがある場合にTrueを返す -->
+    <!-- 前頁あり⇒そのページへのリンクを設定した<<を表示 -->
+    {% if page_obj.has_previous %}
+    <li class="page_item">
+        <a class="page-link p-btn_l"
+           href="?page={{ page_obj.previous_page_number}}"
+           aria-label="Previous">
+           <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    {% endif %}
+
+    <!-- すべてのページについて、ページ番号のアイコンを表示(1から始まるページ番号を返す)
+        page_pbj.paginator.page_rangeとして取得。numに順次取り出される -->
+    {% for num in page_obj.paginator.page_range %}
+
+        <!-- 処理中のページ番号が引き渡されたページ番号と一致する場合はページ番号のアイコンを表示(リンク設定なし) -->
+        {% if page_obj.number == num %}
+        <li class="page-item active">
+            <span class="page-now p-btn">{{num}}</span>
+        </li>
+        <!-- ページ番号が引き渡されたページの番号と一致しない場合、ページ番号のアイコンにリンクを設定して表示 -->
+        {% else %}
+        <li class="page-item">
+            <a class="page-link p-btn" href="?page={{num}}">{{num}}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+
+    <!-- 次ページへのリンクを示すアイコンを表示。page.has_next:次ページがある場合にTrue -->
+    <!-- 次ページがあったら、次ページリンクを設定したアイコン>>を表示 -->
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a class="page-link p-btn"
+           href="?page={{ page_obj.next_page_number}}"
+           aria-label="Next">
+           <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endif %}
+
+</ul>

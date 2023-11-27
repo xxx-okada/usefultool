@@ -1,0 +1,28 @@
+<!--ベーステンプレートを適応-->
+{% extends 'base.html' %}
+
+<!--ヘッダー情報のページタイトルを設定-->
+{% block title %}Tool Search{% endblock %}
+
+{% block contents %}
+<div style="margin-right:auto; margin-left:auto; margin-top:5%; margin-bottom:4%; border:none;">
+
+
+<form action="" method="get" class="space1">
+  <p>検索したいワードを入力してください</p>
+  <input name="query" value="{{ request.GET.query }}" type="text" placeholder=" 検索ワード " class="txt_box">
+  <button type="submit" class="btn-color4">検索</button>
+</form>
+
+{% if object_list.count == 0 %}
+  <br><br>
+  <h4 class="space1">検索しましたが、キーワードと一致する投稿はありませんでした。</h4>
+
+  {% else %}
+  {% include "tools_list.html" %}
+  {% include "pagination.html" %}
+
+{% endif %}
+
+</div>
+{% endblock %}

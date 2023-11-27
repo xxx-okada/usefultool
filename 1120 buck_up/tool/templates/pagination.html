@@ -1,0 +1,75 @@
+<style>
+    /* 参考：https://csshtml.work/button-color/#i , https://rilaks.jp/blog/mouse-over/#i-5 */
+    .color {
+      background-color: white;
+      border-color: coral;
+      color: coral;
+    }
+    .color:hover{
+      background-color: coral;
+      color: white;
+      border-style:none ;
+    }
+/* 
+.page-item.active .page-link{z-index:3;color:#fff;background-color:coral;border-color:coral}
+.page-item.disabled .page-link{color:#6c757d;pointer-events:none;background-color:#fff;border-color:#dee2e6}.page-link{padding:.375rem .75rem}
+.page-item:first-child .page-link{border-top-left-radius:.25rem;border-bottom-left-radius:.25rem}
+.page-item:last-child .page-link{border-top-right-radius:.25rem;border-bottom-right-radius:.25rem}
+
+.pagination-lg .page-link{padding:.75rem 1.5rem;font-size:1.25rem}
+.pagination-lg .page-item:first-child .page-link{border-top-left-radius:.3rem;border-bottom-left-radius:.3rem}
+.pagination-lg .page-item:last-child .page-link{border-top-right-radius:.3rem;border-bottom-right-radius:.3rem}
+.pagination-sm .page-link{padding:.25rem .5rem;font-size:.875rem}
+.pagination-sm .page-item:first-child .page-link{border-top-left-radius:.2rem;border-bottom-left-radius:.2rem}
+.pagination-sm .page-item:last-child .page-link{border-top-right-radius:.2rem;border-bottom-right-radius:.2rem}
+ */
+
+  </style>
+
+<!--P246~ ページネーションアイコンを左右中央に配置 -->
+<ul class="pagination"
+    style="justify-content:center" >
+
+    <!-- 前頁を表示するアイコンとリンクの設定＋ページネーションされたページオブジェクトをpage_objで取得
+         page.has_prexious:直前にページがある場合にTrueを返す -->
+    <!-- 前頁あり⇒そのページへのリンクを設定した<<を表示 -->
+    {% if page_obj.has_previous %}
+    <li class="page_item">
+        <a class="page-link"
+           href="?page={{ page_obj.previous_page_number}}"
+           aria-label="Previous">
+           <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    {% endif %}
+
+    <!-- すべてのページについて、ページ番号のアイコンを表示(1から始まるページ番号を返す)
+        page_pbj.paginator.page_rangeとして取得。numに順次取り出される -->
+    {% for num in page_obj.paginator.page_range %}
+
+        <!-- 処理中のページ番号が引き渡されたページ番号と一致する場合はページ番号のアイコンを表示(リンク設定なし) -->
+        {% if page_obj.number == num %}
+        <li class="page-item active">
+            <span class="page-link">{{num}}</span>
+        </li>
+        <!-- ページ番号が引き渡されたページの番号と一致しない場合、ページ番号のアイコンにリンクを設定して表示 -->
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{num}}">{{num}}</a>
+        </li>
+        {% endif %}
+    {% endfor %}
+
+    <!-- 次ページへのリンクを示すアイコンを表示。page.has_next:次ページがある場合にTrue -->
+    <!-- 次ページがあったら、次ページリンクを設定したアイコン>>を表示 -->
+    {% if page_obj.has_next %}
+    <li class="page-item">
+        <a class="page-link"
+           href="?page={{ page_obj.next_page_number}}"
+           aria-label="Next">
+           <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+    {% endif %}
+
+</ul>
